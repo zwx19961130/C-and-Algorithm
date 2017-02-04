@@ -7,11 +7,21 @@ Star :: Star(GLfloat radius, GLfloat distance, GLfloat speed, GLfloat selfSpeed,
 }
 
 void Star :: drawStar() {
+	glEnable(GL_LINE_SMOOTH);
+	glEnable(GL_BLEND);
 
+	int n = 1440;
+	glPushMatrix();
+ 	{
+		if (parentStar != 0 && parentStar->distance > 0) {
+			glRotatef(parentStar->alpha, 0, 0, 1);
+		}
+	}
 }
 
 void Star :: update(long timeSpan) {
-
+	alpha += timeSpan * speed;
+	alphaSelf += selfSpeed;
 }
 
 Planet :: Planet(GLfloat radius, GLfloat distance, GLfloat speed, GLfloat selfSpeed, Star* parent, GLfloat rgbColor[3]) : Star(radius, distance, speed, selfSpeed, parent) {
